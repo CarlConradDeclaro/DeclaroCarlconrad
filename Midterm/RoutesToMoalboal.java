@@ -111,7 +111,6 @@ class FindShorstestRoutes{
             System.out.println("Estimaed Time Of Arrival: " + hours  +"hr/s,"+ minutes + " minutes.\n");
         }
 }
-
 class Routes{
     private  String startingPoint;
     private String distination;
