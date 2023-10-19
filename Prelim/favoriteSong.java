@@ -1,3 +1,7 @@
+/*
+author: carlconradeclaro
+*/
+
 class FavoriteLines{
       String one = "\"I know you're sad and tired\"";
       String two = "\"You've got nothing left to give \"";

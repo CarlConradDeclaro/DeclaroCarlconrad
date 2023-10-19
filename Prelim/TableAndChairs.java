@@ -1,6 +1,6 @@
-
-package TableAndChairPattern;
-
+/*
+author: carlconradeclaro
+*/
 class TableAndChairs{
 
       static void DynamicTableAndChair(int x,int y){
