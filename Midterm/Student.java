@@ -7,12 +7,13 @@ public class Student {
     String lastName;
     String suffix;
 
-    // Student(String name,String middleName,String lastName,String suffix ){
-    //    this.name = name;
-    //    this.middleName = middleName;
-    //    this.lastName = lastName ;
-    //    this.suffix = suffix;
-    // }
+    Student(){}
+    Student(String name,String middleName,String lastName,String suffix ){
+       this.name = name;
+       this.middleName = middleName;
+       this.lastName = lastName ;
+       this.suffix = suffix;
+    }
 
     public String getName(){return name;}
     public String getMiddleName(){return  middleName;}
@@ -33,17 +34,26 @@ public class Student {
     public String setSuffix(String suffix){
         return this.suffix = suffix;
     }
-
+    
+    public void display(){
+        System.out.println("Full Name: "+getName() + " "+ middleName + " "+ lastName +" "+ suffix);
+    }
 
 
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         Student student = new Student();
-        System.out.println("Enter name");
+
+        System.out.print("Enter name: ");
         String name = student.setName(sc.nextLine());
+        System.out.print("Enter middle name: ");
         String midName = student.setMiddleName(sc.nextLine());
+        System.out.print("Enter last name: ");
         String lastname = student.setLastName(sc.nextLine());
+        System.out.print("Enter suffix: ");
         String suffix= student.setSuffix(sc.nextLine());
-       System.out.println(student.getName() + " "+ student.middleName + " "+ student.lastName +" "+ student.suffix);
-    }
+
+        Student fullName = new Student(name,midName, lastname, suffix);
+        fullName.display();
+     }
 }
