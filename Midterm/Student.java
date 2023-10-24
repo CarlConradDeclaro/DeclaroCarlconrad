@@ -36,7 +36,7 @@ public class Student {
     }
     
     public void display(){
-        System.out.println("Full Name: "+getName() + " "+ middleName + " "+ lastName +" "+ suffix);
+        System.out.println("Full Name: "+getName() + " "+ getMiddleName() + " "+ getLastName() +" "+ getSuffix());
     }
 
 
