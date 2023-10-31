@@ -6,7 +6,6 @@ class BankAccount {
     private String accountName;
     private double balance =0;
    
-    Scanner sc = new Scanner(System.in);
     BankAccount(){}   
     // public BankAccount(int accountNumber, String accountName, double balance) {
     //     this.accountNumber = accountNumber;
