@@ -5,11 +5,12 @@ author: carlconradeclaro
 */
  
 class PMDAS{
-     public static int calculatePMDAS(String expression) {
+     
+    public static int calculatePMDAS(String expression) {
         Stack<Integer> values = new Stack<>();
         Stack<Character> operators = new Stack<>();
-        StringBuilder posfix = new StringBuilder();
-
+       
+      
         for (int i = 0; i < expression.length(); i++) {
             char ch = expression.charAt(i);
 
@@ -22,41 +23,46 @@ class PMDAS{
                     i++;
                 }
                 values.push(num);
-                posfix.append(num);
+              
             } else if (ch == '(') {
                 operators.push(ch);
               
             } else if (ch == ')') {
                 while (!operators.isEmpty() && operators.peek() != '(') {
-                    posfix.append(operators.peek());
+                   
                     char operator = operators.pop();
                     int operand2 = values.pop();
                     int operand1 = values.pop();
                     values.push(applyOperator(operator, operand1, operand2));
+                   
                 }
                 operators.pop(); // Pop the '('
             } else if (isOperator(ch)) {
                 while (!operators.isEmpty() && precedence(ch) <= precedence(operators.peek())) {
-                    posfix.append(operators.peek());
+                 
                     char operator = operators.pop();
                     int operand2 = values.pop();
-                    int operand1 = values.pop();
+                    int operand1 = values.pop();              
                     values.push(applyOperator(operator, operand1, operand2));
+                    
                 }
                 operators.push(ch);
             }  
         }
 
         while (!operators.isEmpty()) {
-            posfix.append(operators.peek());
+           
             char operator = operators.pop();
             int operand2 = values.pop();
             int operand1 = values.pop();
             values.push(applyOperator(operator, operand1, operand2));
+           
         }
-    System.out.println(posfix.toString());
+      
         return values.pop();
     }
+
+   
     private static boolean isOperator(char ch) {
         return ch == '+' || ch == '-' || ch == '*' || ch == '/';
     }
