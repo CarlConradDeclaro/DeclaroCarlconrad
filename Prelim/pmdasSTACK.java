@@ -8,6 +8,7 @@ class PMDAS{
      public static int calculatePMDAS(String expression) {
         Stack<Integer> values = new Stack<>();
         Stack<Character> operators = new Stack<>();
+        StringBuilder posfix = new StringBuilder();
 
         for (int i = 0; i < expression.length(); i++) {
             char ch = expression.charAt(i);
@@ -15,21 +16,19 @@ class PMDAS{
             if (ch == ' ') {
                 continue; // Skip spaces
             } else if (Character.isDigit(ch)) {
-                int num = ch - '0'; //  this ch will convert to int     
-                 // check if the next ch is still a number to determine if the numbr is tens,hundreds or thousands ...
-                while (i + 1 < expression.length() && Character.isDigit(expression.charAt(i + 1))) {
-                     // let say the number is 71 and value of num is 7 and next is 1
-                     // The "num * 10" = 7*10 and the "(expression.charAt(i+1) - '0')" = 1;
-                     // 7*10 + 1 = 71
-                     num = num * 10 + (expression.charAt(i + 1) - '0');
-                     
+                int num = ch - '0'; //  this ch will convert to int                   
+                while (i + 1 < expression.length() && Character.isDigit(expression.charAt(i + 1))) {                   
+                     num = num * 10 + (expression.charAt(i + 1) - '0');                    
                     i++;
                 }
                 values.push(num);
+                posfix.append(num);
             } else if (ch == '(') {
                 operators.push(ch);
+              
             } else if (ch == ')') {
                 while (!operators.isEmpty() && operators.peek() != '(') {
+                    posfix.append(operators.peek());
                     char operator = operators.pop();
                     int operand2 = values.pop();
                     int operand1 = values.pop();
@@ -38,6 +37,7 @@ class PMDAS{
                 operators.pop(); // Pop the '('
             } else if (isOperator(ch)) {
                 while (!operators.isEmpty() && precedence(ch) <= precedence(operators.peek())) {
+                    posfix.append(operators.peek());
                     char operator = operators.pop();
                     int operand2 = values.pop();
                     int operand1 = values.pop();
@@ -48,12 +48,13 @@ class PMDAS{
         }
 
         while (!operators.isEmpty()) {
+            posfix.append(operators.peek());
             char operator = operators.pop();
             int operand2 = values.pop();
             int operand1 = values.pop();
             values.push(applyOperator(operator, operand1, operand2));
         }
-
+    System.out.println(posfix.toString());
         return values.pop();
     }
     private static boolean isOperator(char ch) {
